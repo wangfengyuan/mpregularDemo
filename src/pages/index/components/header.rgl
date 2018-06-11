@@ -4,11 +4,11 @@
     <text>{ title }</text>
   </div>
   <div class="tab-btn">
-    <div class="btn-item">
+    <div class="btn-item { tabs[0] ? 'choose' : '' }" on-click="{ this.showHotTech(1) }">
         <text class="icon icon-fire"></text>
         <span>热门</span>
     </div>
-    <div class="btn-item ">
+    <div class="btn-item { tabs[1] ? 'choose' : '' }" on-click="{ this.showMostUse(2) }">
         <text class="icon icon-stats-dots"></text>
         <span>趋势</span>
     </div>
@@ -18,7 +18,18 @@
 
 <script>
   export default {
-
+      config(data) {
+        Object.assign(this.data, {tabs: [true, false]}, data)
+        // console.log(this.data);
+      },
+      showHotTech(state) {
+          this.data.tabs = [true,false];
+          this.$emit("changStatus", {state});
+      },
+      showMostUse(state) {
+          this.data.tabs = [false, true];
+          this.$emit("changStatus", {state});
+      }
   }
 </script>
 

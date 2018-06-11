@@ -94,7 +94,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 console.log(_data2.default); // <template>
 //   <div class="top-title">
-//     <Header title="{ title }"></Header>
+//     <Header title="{ title }" on-changStatus="{ this.changLists($event) }"></Header>
 //   </div>
 //   <div class="article-lists"> 
 //     <Content listItems = "{ listItems }"></Content>
@@ -113,6 +113,14 @@ exports.default = {
       title: "前端TOP100",
       listItems: _data2.default.repos
     };
+  },
+  changLists: function changLists(e) {
+    // console.log(e);
+    if (e.state === 1) {
+      this.data.listItems = _data2.default.repos;
+    } else {
+      this.data.listItems = _data2.default.repos.concat().reverse();
+    }
   }
 };
 // </script>
@@ -181,7 +189,7 @@ module.exports = __Component__;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 // <template>
 // <div class="header-wrap">
@@ -189,11 +197,11 @@ Object.defineProperty(exports, "__esModule", {
 //     <text>{ title }</text>
 //   </div>
 //   <div class="tab-btn">
-//     <div class="btn-item">
+//     <div class="btn-item { tabs[0] ? 'choose' : '' }" on-click="{ this.showHotTech(1) }">
 //         <text class="icon icon-fire"></text>
 //         <span>热门</span>
 //     </div>
-//     <div class="btn-item ">
+//     <div class="btn-item { tabs[1] ? 'choose' : '' }" on-click="{ this.showMostUse(2) }">
 //         <text class="icon icon-stats-dots"></text>
 //         <span>趋势</span>
 //     </div>
@@ -202,7 +210,20 @@ Object.defineProperty(exports, "__esModule", {
 // </template>
 //
 // <script>
-exports.default = {};
+exports.default = {
+    config: function config(data) {
+        Object.assign(this.data, { tabs: [true, false] }, data);
+        // console.log(this.data);
+    },
+    showHotTech: function showHotTech(state) {
+        this.data.tabs = [true, false];
+        this.$emit("changStatus", { state: state });
+    },
+    showMostUse: function showMostUse(state) {
+        this.data.tabs = [false, true];
+        this.$emit("changStatus", { state: state });
+    }
+};
 // </script>
 //
 // <style>
@@ -255,7 +276,7 @@ exports.default = {};
 /***/ (function(module, exports) {
 
 module.exports = {
-        ast: [{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"header-wrap","holders":[]}],"children":[{"type":"text","text":"\n  "},{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"header-title","holders":[]}],"children":[{"type":"text","text":"\n    "},{"type":"element","tag":"text","attrs":[],"children":[{"type":"expression","body":"c._sg_('title', d, e)","constant":false,"setbody":"c._ss_('title',p_,d, '=', 1)","raw":"title","holderId":0}]},{"type":"text","text":"\n  "}]},{"type":"text","text":"\n  "},{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"tab-btn","holders":[]}],"children":[{"type":"text","text":"\n    "},{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"btn-item","holders":[]}],"children":[{"type":"text","text":"\n        "},{"type":"element","tag":"text","attrs":[{"type":"attribute","name":"class","value":"icon icon-fire","holders":[]}],"children":[]},{"type":"text","text":"\n        "},{"type":"element","tag":"span","attrs":[],"children":[{"type":"text","text":"热门"}]},{"type":"text","text":"\n    "}]},{"type":"text","text":"\n    "},{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"btn-item ","holders":[]}],"children":[{"type":"text","text":"\n        "},{"type":"element","tag":"text","attrs":[{"type":"attribute","name":"class","value":"icon icon-stats-dots","holders":[]}],"children":[]},{"type":"text","text":"\n        "},{"type":"element","tag":"span","attrs":[],"children":[{"type":"text","text":"趋势"}]},{"type":"text","text":"\n    "}]},{"type":"text","text":"\n  "}]},{"type":"text","text":"\n"}]}],
+        ast: [{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"header-wrap","holders":[]}],"children":[{"type":"text","text":"\n  "},{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"header-title","holders":[]}],"children":[{"type":"text","text":"\n    "},{"type":"element","tag":"text","attrs":[],"children":[{"type":"expression","body":"c._sg_('title', d, e)","constant":false,"setbody":"c._ss_('title',p_,d, '=', 1)","raw":"title","holderId":0}]},{"type":"text","text":"\n  "}]},{"type":"text","text":"\n  "},{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"tab-btn","holders":[]}],"children":[{"type":"text","text":"\n    "},{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"btn-item { tabs[0] ? 'choose' : '' }","holders":[{"type":"expression","body":"c._sg_(0, c._sg_('tabs', d, e))?'choose':''","constant":false,"setbody":false,"raw":"tabs[0] ? 'choose' : ''","holderId":1}]},{"type":"attribute","name":"on-click","value":"{ this.showHotTech(1) }","holders":[{"type":"expression","body":"c.showHotTech(1)","constant":false,"setbody":false,"raw":"this.showHotTech(1)","holderId":2}]}],"children":[{"type":"text","text":"\n        "},{"type":"element","tag":"text","attrs":[{"type":"attribute","name":"class","value":"icon icon-fire","holders":[]}],"children":[]},{"type":"text","text":"\n        "},{"type":"element","tag":"span","attrs":[],"children":[{"type":"text","text":"热门"}]},{"type":"text","text":"\n    "}],"eventId":"0"},{"type":"text","text":"\n    "},{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"btn-item { tabs[1] ? 'choose' : '' }","holders":[{"type":"expression","body":"c._sg_(1, c._sg_('tabs', d, e))?'choose':''","constant":false,"setbody":false,"raw":"tabs[1] ? 'choose' : ''","holderId":3}]},{"type":"attribute","name":"on-click","value":"{ this.showMostUse(2) }","holders":[{"type":"expression","body":"c.showMostUse(2)","constant":false,"setbody":false,"raw":"this.showMostUse(2)","holderId":4}]}],"children":[{"type":"text","text":"\n        "},{"type":"element","tag":"text","attrs":[{"type":"attribute","name":"class","value":"icon icon-stats-dots","holders":[]}],"children":[]},{"type":"text","text":"\n        "},{"type":"element","tag":"span","attrs":[],"children":[{"type":"text","text":"趋势"}]},{"type":"text","text":"\n    "}],"eventId":"1"},{"type":"text","text":"\n  "}]},{"type":"text","text":"\n"}]}],
         expressions: {
     get: {"['header-wrap'].join('')":function anonymous(c,e
 /*``*/) {
@@ -273,13 +294,33 @@ module.exports = {
 /*``*/) {
 'use strict';var d=c.data;e=e||'';return (['tab-btn'].join(''))
 },
-"['btn-item'].join('')":function anonymous(c,e
+"['btn-item ',c._sg_(0, c._sg_('tabs', d, e))?'choose':''].join('')":function anonymous(c,e
 /*``*/) {
-'use strict';var d=c.data;e=e||'';return (['btn-item'].join(''))
+'use strict';var d=c.data;e=e||'';return (['btn-item ',c._sg_(0, c._sg_('tabs', d, e))?'choose':''].join(''))
+},
+"c._sg_(0, c._sg_('tabs', d, e))?'choose':''":function anonymous(c,e
+/*``*/) {
+'use strict';var d=c.data;e=e||'';return (c._sg_(0, c._sg_('tabs', d, e))?'choose':'')
+},
+"c.showHotTech(1)":function anonymous(c,e
+/*``*/) {
+'use strict';var d=c.data;e=e||'';return (c.showHotTech(1))
 },
 "['icon icon-fire'].join('')":function anonymous(c,e
 /*``*/) {
 'use strict';var d=c.data;e=e||'';return (['icon icon-fire'].join(''))
+},
+"['btn-item ',c._sg_(1, c._sg_('tabs', d, e))?'choose':''].join('')":function anonymous(c,e
+/*``*/) {
+'use strict';var d=c.data;e=e||'';return (['btn-item ',c._sg_(1, c._sg_('tabs', d, e))?'choose':''].join(''))
+},
+"c._sg_(1, c._sg_('tabs', d, e))?'choose':''":function anonymous(c,e
+/*``*/) {
+'use strict';var d=c.data;e=e||'';return (c._sg_(1, c._sg_('tabs', d, e))?'choose':'')
+},
+"c.showMostUse(2)":function anonymous(c,e
+/*``*/) {
+'use strict';var d=c.data;e=e||'';return (c.showMostUse(2))
 },
 "['icon icon-stats-dots'].join('')":function anonymous(c,e
 /*``*/) {
@@ -426,7 +467,7 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-        ast: [{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"top-title","holders":[]}],"children":[{"type":"text","text":"\n  "},{"type":"element","tag":"Header","attrs":[{"type":"attribute","name":"title","value":"{ title }"}],"children":[],"localComponentIndex":0},{"type":"text","text":"\n"}]},{"type":"text","text":"\n"},{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"article-lists","holders":[]}],"children":[{"type":"text","text":" \n  "},{"type":"element","tag":"Content","attrs":[{"type":"attribute","name":"listItems","value":"{ listItems }"}],"children":[],"localComponentIndex":1},{"type":"text","text":"\n"}]}],
+        ast: [{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"top-title","holders":[]}],"children":[{"type":"text","text":"\n  "},{"type":"element","tag":"Header","attrs":[{"type":"attribute","name":"title","value":"{ title }"},{"type":"attribute","name":"on-changStatus","value":"{ this.changLists($event) }"}],"children":[],"localComponentIndex":0},{"type":"text","text":"\n"}]},{"type":"text","text":"\n"},{"type":"element","tag":"div","attrs":[{"type":"attribute","name":"class","value":"article-lists","holders":[]}],"children":[{"type":"text","text":" \n  "},{"type":"element","tag":"Content","attrs":[{"type":"attribute","name":"listItems","value":"{ listItems }"}],"children":[],"localComponentIndex":1},{"type":"text","text":"\n"}]}],
         expressions: {
     get: {"['top-title'].join('')":function anonymous(c,e
 /*``*/) {
@@ -435,6 +476,10 @@ module.exports = {
 "c._sg_('title', d, e)":function anonymous(c,e
 /*``*/) {
 'use strict';var d=c.data;e=e||'';return (c._sg_('title', d, e))
+},
+"c.changLists(c._sg_('$event', d, e))":function anonymous(c,e
+/*``*/) {
+'use strict';var d=c.data;e=e||'';return (c.changLists(c._sg_('$event', d, e)))
 },
 "['article-lists'].join('')":function anonymous(c,e
 /*``*/) {
@@ -537,7 +582,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
     config: function config(data) {
         // this.data = data.item || [];
-        console.log(this.data);
+        // console.log(this.data);
     },
 
     computed: {

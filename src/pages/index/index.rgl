@@ -1,6 +1,6 @@
 <template>
   <div class="top-title">
-    <Header title="{ title }"></Header>
+    <Header title="{ title }" on-changStatus="{ this.changLists($event) }"></Header>
   </div>
   <div class="article-lists"> 
     <Content listItems = "{ listItems }"></Content>
@@ -23,6 +23,14 @@ import Content from './components/content.rgl';
       this.data = {
         title: "前端TOP100",
         listItems: lists.repos
+      }
+    },
+    changLists(e) {
+      // console.log(e);
+      if(e.state === 1) {
+        this.data.listItems = lists.repos;
+      } else {
+        this.data.listItems = lists.repos.concat().reverse();
       }
     }
   }

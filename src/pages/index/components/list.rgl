@@ -15,7 +15,7 @@
   export default {
     config(data) {
         // this.data = data.item || [];
-        console.log(this.data);
+        // console.log(this.data);
     },
     computed: {
         imgUrl() {
