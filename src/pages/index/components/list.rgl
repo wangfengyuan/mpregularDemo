@@ -1,15 +1,93 @@
 <template>
-<div class="data-lists">
-
+<div class="data-lists { key+1 === 1 ? 'first' : ''}">
+    <div class="item-id">
+        <text>{ key+1 }</text>
+    </div>
+    <img class="item-img" src="{ imgUrl}" />
+    <div class="item-right">
+        <div class="item-title">{ item.name }</div>
+        <div class="item-desc">{ item.description_cn }</div>
+    </div>
 </div>
 </template>
 
 <script>
   export default {
-   
+    config(data) {
+        // this.data = data.item || [];
+        console.log(this.data);
+    },
+    computed: {
+        imgUrl() {
+            return "https://awesomes.oss-cn-beijing.aliyuncs.com/repo/" + this.data.item.cover + "?x-oss-process=style/subject_repo"
+        }
+    }
   }
 </script>
 
 <style>
+.data-lists {
+  display: flex;
+  padding: 30rpx;
+  padding-left: 0;
+  border-bottom: 1rpx solid #f5f5f5;
+  color: rgb(78, 79, 84);
+}
 
+.first{
+  display: block;
+  box-sizing: border-box;
+  height: 170rpx;
+  overflow: hidden;
+  padding: 15rpx 0;
+  background-color: rgba(8,105,132,.9); 
+  color: #60bed8;
+  text-align: center; 
+  border: none;
+} 
+.item-id{
+  width: 80rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-weight: bold;
+  font-size: 14px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  text-align: center;
+}
+.first .item-id {
+  display: none;
+} 
+.first image {
+  border-radius: 50%;
+}
+.data-lists.first .item-right {
+  padding: 0 20rpx;
+  line-height: 20rpx;
+}
+.data-lists .item-right {
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow: hidden;
+  padding-left: 15rpx;
+  font-size: 8px;
+}
+.data-lists .item-right .item-title {
+  line-height: 30rpx;
+  font-weight: bold;
+}
+.data-lists .item-right .item-desc {
+  line-height: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break:keep-all;
+  word-wrap:normal;
+}
+.data-lists .item-img {
+  width: 60rpx;
+  height: 60rpx;
+  flex-grow: 0;
+  flex-shrink: 0
+} 
 </style>

@@ -1,7 +1,9 @@
 <template>
-{#list listItems as item}
-<List></List>
-{/list}
+<div class="main-wrap">
+  {#list listItems as item}
+    <List item = "{ item }" key="{ item_index }"></List>
+  {/list}
+</div>
 </template>
 
 <script>
@@ -9,10 +11,18 @@
 import List from './list.rgl';
 
   export default {
-   
+    components: {
+      List
+    }
   }
 </script>
 
 <style>
-
+.main-wrap {
+  box-sizing: border-box;
+  width: 60%;
+  margin: 0 auto;
+  background: #fff;
+  overflow: hidden;
+}
 </style>
