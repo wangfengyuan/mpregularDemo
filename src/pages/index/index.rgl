@@ -1,13 +1,25 @@
 <template>
-12324343
+    <Header title="{ title }"></Header>
+    <Content listItems = "{ listItems }"></Content>
 </template>
 
 <script>
+import lists from './data.js';
+import Header from './components/header.rgl';
+import Content from './components/content.rgl';
+
   export default {
     mpType: 'page',
-    created() {
-
+    components: {
+        Header,
+        Content
     },
+    config() {
+      this.data = {
+        title: "前端TOP100",
+        listItems: lists
+      }
+    }
   }
 </script>
 

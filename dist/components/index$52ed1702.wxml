@@ -1,1 +1,4 @@
-<template name="index$52ed1702">12324343</template>
+<import src="header$097c4c43" />
+<import src="content$2f5d0183" />
+<template name="index$52ed1702"><template is="header$097c4c43" data="{{ ...$root[ $kk + '0' ], $root, $defaultSlot: 'defaultSlot' }}"></template>
+<template is="content$2f5d0183" data="{{ ...$root[ $kk + '1' ], $root, $defaultSlot: 'defaultSlot' }}"></template></template>

@@ -1,0 +1,66 @@
+<template>
+<div class="header-wrap">
+  <div class="header-title">
+    <text>{ title }</text>
+  </div>
+  <div class="tab-btn">
+    <div class="btn-item">
+        <text class="icon icon-fire"></text>
+        <span>热门</span>
+    </div>
+    <div class="btn-item ">
+        <text class="icon icon-stats-dots"></text>
+        <span>趋势</span>
+    </div>
+  </div>
+</div>
+</template>
+
+<script>
+  export default {
+
+  }
+</script>
+
+<style>
+@import "../css/style.css";
+.header-wrap {
+  width: 100%;
+   height: 400rpx; 
+  padding-top: 50rpx;
+  background-image: linear-gradient(135deg,#79f1a4,#0e5cad);
+  text-align: center;
+  color: #fff
+}
+.header-wrap .header-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+.header-wrap .tab-btn {
+  width: 300rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 40rpx auto 0;
+}
+.header-wrap .tab-btn .btn-item{
+  width: 85rpx;
+  height: 30rpx;
+  margin: 0 18rpx;
+  padding: 10rpx;
+  line-height: 30rpx;
+  font-size: 8px;
+  border: 1rpx solid #fff;
+  cursor: pointer;
+} 
+.header-wrap .tab-btn .choose {
+  background: #fff;
+  color: #0099c3;
+}
+.header-wrap .tab-btn .btn-item .icon{
+  display: inline-block;
+  width: 20rpx;
+  height: 20rpx;
+}
+
+</style>

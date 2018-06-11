@@ -6,6 +6,6 @@ app.$inject()
 
 export default {
   config: {
-    navigationBarTitleText: 'index'
+    navigationBarTitleText: '前端'
   }
 }

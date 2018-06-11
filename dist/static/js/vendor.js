@@ -787,7 +787,7 @@ _.getListIndexArray = function(extra) {
 
 
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(31).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(31).setImmediate))
 
 /***/ }),
 /* 1 */
@@ -840,13 +840,13 @@ module.exports = {
  * render for component in browsers
  */
 
-var env = __webpack_require__(5);
-var Lexer = __webpack_require__(7);
-var Parser = __webpack_require__(8);
+var env = __webpack_require__(6);
+var Lexer = __webpack_require__(8);
+var Parser = __webpack_require__(9);
 var config = __webpack_require__(1);
 var _ = __webpack_require__(0);
 var extend = __webpack_require__(36);
-var shared = __webpack_require__(10);
+var shared = __webpack_require__(11);
 var combine = {};
 
 // if(env.browser){
@@ -854,15 +854,15 @@ var combine = {};
   var walkers = __webpack_require__(37);
   var Group = __webpack_require__(18);
   // var doc = dom.doc;
-  combine = __webpack_require__(13);
+  combine = __webpack_require__(14);
 // }
 var events = __webpack_require__(46);
 var Watcher = __webpack_require__(47);
-var parse = __webpack_require__(11);
+var parse = __webpack_require__(12);
 var filter = __webpack_require__(49);
 var ERROR = __webpack_require__(2).ERROR;
-var nodeCursor = __webpack_require__(14);
-var shared = __webpack_require__(10);
+var nodeCursor = __webpack_require__(15);
+var shared = __webpack_require__(11);
 var mp = __webpack_require__(19);
 var NOOP = function(){};
 
@@ -1506,6 +1506,45 @@ module.exports = Regular;
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var env =  __webpack_require__(6);
+var config = __webpack_require__(1); 
+var Regular = module.exports = __webpack_require__(3);
+var Parser = Regular.Parser;
+var Lexer = Regular.Lexer;
+
+// if(env.browser){
+    __webpack_require__(50);
+    // require("./directive/animation");
+    __webpack_require__(53);
+    // Regular.dom = require("./dom");
+// }
+Regular.env = env;
+Regular.util = __webpack_require__(0);
+Regular.parse = function(str, options){
+  options = options || {};
+
+  if(options.BEGIN || options.END){
+    if(options.BEGIN) config.BEGIN = options.BEGIN;
+    if(options.END) config.END = options.END;
+    Lexer.setup();
+  }
+  var ast = new Parser(str).parse();
+  return !options.stringify? ast : JSON.stringify(ast);
+}
+Regular.Cursor =__webpack_require__(15) 
+
+Regular.isServer = env.node;
+Regular.isRegular = function( Comp ){
+  return  Comp.prototype instanceof Regular;
+}
+
+
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
 const Buffer = __webpack_require__(39);
 
 function initRootVM(page, opt) {
@@ -1615,7 +1654,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// some fixture test;
@@ -1635,7 +1674,7 @@ exports.isRunning = false;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(16)))
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 var g;
@@ -1662,7 +1701,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _ = __webpack_require__(0);
@@ -2035,14 +2074,14 @@ module.exports = Lexer;
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _ = __webpack_require__(0);
 
 var config = __webpack_require__(1);
-var node = __webpack_require__(9);
-var Lexer = __webpack_require__(7);
+var node = __webpack_require__(10);
+var Lexer = __webpack_require__(8);
 var varName = _.varName;
 var ctxName = _.ctxName;
 var extName = _.extName;
@@ -2781,7 +2820,7 @@ module.exports = Parser;
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -2851,13 +2890,13 @@ module.exports = {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _ = __webpack_require__(0);
 var config = __webpack_require__(1);
-var parse = __webpack_require__(11);
-var node = __webpack_require__(9);
+var parse = __webpack_require__(12);
+var node = __webpack_require__(10);
 
 
 function initDefinition(context, definition, beforeConfig){
@@ -3004,12 +3043,12 @@ module.exports = {
 }
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var exprCache = __webpack_require__(5).exprCache;
+var exprCache = __webpack_require__(6).exprCache;
 var _ = __webpack_require__(0);
-var Parser = __webpack_require__(8);
+var Parser = __webpack_require__(9);
 module.exports = {
   expression: function(expr, simple){
     // @TODO cache
@@ -3026,7 +3065,7 @@ module.exports = {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _ = __webpack_require__(0);
@@ -3207,7 +3246,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 // some nested  operation in ast 
@@ -3323,7 +3362,7 @@ var combine = module.exports = {
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 function NodeCursor(node, parentNode){
@@ -3341,45 +3380,6 @@ no.next = function(){
 }
 
 module.exports = function(n, p){ return new NodeCursor(n, p)}
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var env =  __webpack_require__(5);
-var config = __webpack_require__(1); 
-var Regular = module.exports = __webpack_require__(3);
-var Parser = Regular.Parser;
-var Lexer = Regular.Lexer;
-
-// if(env.browser){
-    __webpack_require__(50);
-    // require("./directive/animation");
-    __webpack_require__(53);
-    // Regular.dom = require("./dom");
-// }
-Regular.env = env;
-Regular.util = __webpack_require__(0);
-Regular.parse = function(str, options){
-  options = options || {};
-
-  if(options.BEGIN || options.END){
-    if(options.BEGIN) config.BEGIN = options.BEGIN;
-    if(options.END) config.END = options.END;
-    Lexer.setup();
-  }
-  var ast = new Parser(str).parse();
-  return !options.stringify? ast : JSON.stringify(ast);
-}
-Regular.Cursor =__webpack_require__(14) 
-
-Regular.isServer = env.node;
-Regular.isRegular = function( Comp ){
-  return  Comp.prototype instanceof Regular;
-}
-
-
 
 
 /***/ }),
@@ -3778,7 +3778,7 @@ module.exports = diffTrack
 /***/ (function(module, exports, __webpack_require__) {
 
 var _ = __webpack_require__(0);
-var combine = __webpack_require__(13)
+var combine = __webpack_require__(14)
 
 function Group(list){
   this.children = list || [];
@@ -3847,7 +3847,7 @@ module.exports = {
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var VM = __webpack_require__(4);
+var VM = __webpack_require__(5);
 
 function addEventHandler(eventId, type, handler) {
   if (!this._eventHandlers) {
@@ -3974,11 +3974,11 @@ module.exports = function callHook(vm, hook, options) {
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const diff = __webpack_require__(12);
+const diff = __webpack_require__(13);
 const _ = __webpack_require__(0);
 const utils = __webpack_require__(40);
 const throttle = __webpack_require__(41);
-const VM = __webpack_require__(4);
+const VM = __webpack_require__(5);
 const DATA_ROOT = '$root';
 const SPLITTER = ',';
 
@@ -4491,7 +4491,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
 /* 32 */
@@ -4684,7 +4684,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(16)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(16)))
 
 /***/ }),
 /* 33 */
@@ -5208,11 +5208,11 @@ module.exports = function extend(o){
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var diffArray = __webpack_require__(12).diffArray;
-var combine = __webpack_require__(13);
+var diffArray = __webpack_require__(13).diffArray;
+var combine = __webpack_require__(14);
 // var animate = require("./helper/animate");
-var Parser = __webpack_require__(8);
-var node = __webpack_require__(9);
+var Parser = __webpack_require__(9);
+var node = __webpack_require__(10);
 var Group = __webpack_require__(18);
 // var dom = require("./dom");
 var _ = __webpack_require__(0);
@@ -5220,9 +5220,9 @@ var consts = __webpack_require__(2);
 var OPTIONS = consts.OPTIONS;
 var ERROR = consts.ERROR;
 var MSG = consts.MSG;
-var nodeCursor = __webpack_require__(14);
+var nodeCursor = __webpack_require__(15);
 var config = __webpack_require__(1)
-var shared = __webpack_require__(10);
+var shared = __webpack_require__(11);
 var dconst = __webpack_require__(2).DIFF
 var mp = __webpack_require__(19);
 
@@ -6166,7 +6166,7 @@ var events = __webpack_require__(20);
 var callHook = __webpack_require__(21);
 var dataSync = __webpack_require__(22);
 var wxParse = __webpack_require__(23);
-var VM = __webpack_require__(4);
+var VM = __webpack_require__(5);
 
 page.init = function init(vm, opt) {
   Page({
@@ -7233,7 +7233,7 @@ module.exports = HTMLParser;
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var VM = __webpack_require__(4);
+var VM = __webpack_require__(5);
 var callHook = __webpack_require__(21);
 var app = {};
 
@@ -7399,8 +7399,8 @@ module.exports = Event;
 /***/ (function(module, exports, __webpack_require__) {
 
 var _ = __webpack_require__(0);
-var parseExpression = __webpack_require__(11).expression;
-var diff = __webpack_require__(12);
+var parseExpression = __webpack_require__(12).expression;
+var diff = __webpack_require__(13);
 var diffTrack = __webpack_require__(17);
 var diffArray = diff.diffArray;
 var diffObject = diff.diffObject;
@@ -7740,7 +7740,7 @@ module.exports = Watcher;
 /* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Lexer = __webpack_require__(7);
+var Lexer = __webpack_require__(8);
 
 module.exports = function(path) {
   var tokens = new Lexer(path, { mode: 2, expression: true }).lex();
@@ -8367,7 +8367,15 @@ Regular.plugin('$timeout', TimeoutModule);
 /* 56 */,
 /* 57 */,
 /* 58 */,
-/* 59 */
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */
 /***/ (function(module, exports) {
 
 /*
@@ -8449,7 +8457,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 60 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
