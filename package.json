@@ -1,0 +1,36 @@
+{
+  "name": "mpregular-example",
+  "version": "0.0.1",
+  "description": " 练习DEMO",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wangfengyuan/mpregularDemo.git"
+  },
+  "author": "wang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wangfengyuan/mpregularDemo/issues"
+  },
+  "homepage": "https://github.com/wangfengyuan/mpregularDemo#readme",
+  "devDependencies": {
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "file-loader": "^1.1.11",
+    "less": "^3.0.1",
+    "less-loader": "^4.1.0",
+    "mpregular": "0.0.26",
+    "mpregular-loader": "0.0.35",
+    "mpvue-webpack-target": "^1.0.0",
+    "style-loader": "^0.20.3",
+    "url-loader": "^1.0.1",
+    "webpack": "^3.11.0"
+  }
+}

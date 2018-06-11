@@ -1,0 +1,2 @@
+@import "./wxparse/index.wxss";
+@import "./static/css/app.wxss";
