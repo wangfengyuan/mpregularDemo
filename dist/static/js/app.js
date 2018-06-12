@@ -43,7 +43,7 @@ var __regular_script__, __regular_template__;
 __webpack_require__(27)
 __regular_script__ = __webpack_require__(29)
 __regular_template__ = __webpack_require__(30)
-var Regular = __webpack_require__( 4 );
+var Regular = __webpack_require__( 3 );
 
 var __rs__ = __regular_script__ || {};
 if (__rs__.__esModule) __rs__ = __rs__["default"];

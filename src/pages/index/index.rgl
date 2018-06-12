@@ -42,10 +42,13 @@ page {
   display: flex;
   flex-direction: column;
   background-color: #f7f8fa;
-  padding-bottom: 50rpx;
+  padding-bottom: 50rpx; 
 }
 page .top-title {
   box-sizing: border-box;
-  margin-bottom: -170rpx;
+  height: 450rpx;
+}
+page .article-lists {
+  margin-top: -170rpx;
 }
 </style>

@@ -836,6 +836,45 @@ module.exports = {
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var env =  __webpack_require__(6);
+var config = __webpack_require__(1); 
+var Regular = module.exports = __webpack_require__(4);
+var Parser = Regular.Parser;
+var Lexer = Regular.Lexer;
+
+// if(env.browser){
+    __webpack_require__(50);
+    // require("./directive/animation");
+    __webpack_require__(53);
+    // Regular.dom = require("./dom");
+// }
+Regular.env = env;
+Regular.util = __webpack_require__(0);
+Regular.parse = function(str, options){
+  options = options || {};
+
+  if(options.BEGIN || options.END){
+    if(options.BEGIN) config.BEGIN = options.BEGIN;
+    if(options.END) config.END = options.END;
+    Lexer.setup();
+  }
+  var ast = new Parser(str).parse();
+  return !options.stringify? ast : JSON.stringify(ast);
+}
+Regular.Cursor =__webpack_require__(15) 
+
+Regular.isServer = env.node;
+Regular.isRegular = function( Comp ){
+  return  Comp.prototype instanceof Regular;
+}
+
+
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 /**
  * render for component in browsers
  */
@@ -1500,45 +1539,6 @@ module.exports = Regular;
 //     return node
 //   }
 // }
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var env =  __webpack_require__(6);
-var config = __webpack_require__(1); 
-var Regular = module.exports = __webpack_require__(3);
-var Parser = Regular.Parser;
-var Lexer = Regular.Lexer;
-
-// if(env.browser){
-    __webpack_require__(50);
-    // require("./directive/animation");
-    __webpack_require__(53);
-    // Regular.dom = require("./dom");
-// }
-Regular.env = env;
-Regular.util = __webpack_require__(0);
-Regular.parse = function(str, options){
-  options = options || {};
-
-  if(options.BEGIN || options.END){
-    if(options.BEGIN) config.BEGIN = options.BEGIN;
-    if(options.END) config.END = options.END;
-    Lexer.setup();
-  }
-  var ast = new Parser(str).parse();
-  return !options.stringify? ast : JSON.stringify(ast);
-}
-Regular.Cursor =__webpack_require__(15) 
-
-Regular.isServer = env.node;
-Regular.isRegular = function( Comp ){
-  return  Comp.prototype instanceof Regular;
-}
-
-
 
 
 /***/ }),
@@ -7850,7 +7850,7 @@ f.total = function(array, key){
 var _ = __webpack_require__(0);
 // var dom = require("../dom");
 // var animate = require("../helper/animate");
-var Regular = __webpack_require__(3);
+var Regular = __webpack_require__(4);
 var consts = __webpack_require__(2);
 var namespaces = consts.NAMESPACE;
 var OPTIONS = consts.OPTIONS
@@ -8005,7 +8005,7 @@ Regular.directive(module.exports);
  */
 var _ = __webpack_require__(0);
 // var dom = require("../dom");
-var Regular = __webpack_require__(3);
+var Regular = __webpack_require__(4);
 
 Regular._addProtoInheritCache("event");
 
@@ -8089,7 +8089,7 @@ var _ = __webpack_require__(0);
 var OPTIONS = __webpack_require__(2).OPTIONS
 var STABLE = OPTIONS.STABLE;
 var hasInput;
-var Regular = __webpack_require__(3);
+var Regular = __webpack_require__(4);
 
 // var modelHandlers = {
 //   "text": initText,
@@ -8319,7 +8319,7 @@ Regular.directive("r-model", {
 /* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Regular = __webpack_require__(3);
+var Regular = __webpack_require__(4);
 
 /**
  * Timeout Module
@@ -8375,7 +8375,12 @@ Regular.plugin('$timeout', TimeoutModule);
 /* 64 */,
 /* 65 */,
 /* 66 */,
-/* 67 */
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */
 /***/ (function(module, exports) {
 
 /*
@@ -8457,7 +8462,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 68 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -8835,28 +8840,6 @@ function updateLink (link, options, obj) {
 	link.href = URL.createObjectURL(blob);
 
 	if(oldSrc) URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ }),
-/* 69 */
-/***/ (function(module, exports) {
-
-module.exports = function escape(url) {
-    if (typeof url !== 'string') {
-        return url
-    }
-    // If url is already wrapped in quotes, remove them
-    if (/^['"].*['"]$/.test(url)) {
-        url = url.slice(1, -1);
-    }
-    // Should url be wrapped?
-    // See https://drafts.csswg.org/css-values-3/#urls
-    if (/["'() \t\n]/.test(url)) {
-        return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"'
-    }
-
-    return url
 }
 
 

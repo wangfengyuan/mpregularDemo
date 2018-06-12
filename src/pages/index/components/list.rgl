@@ -39,6 +39,7 @@
   box-sizing: border-box;
   height: 170rpx;
   overflow: hidden;
+  border: none;
   padding: 15rpx 0;
   background-color: rgba(8,105,132,.9); 
   color: #60bed8;
